@@ -21,3 +21,19 @@ node_modules/
 *.log
 *.sql
 *.sqlite
+
+# Keep these files out of the repo
+/wp-content/themes/twenty*
+/wp-content/uploads*
+/wp-content/upgrade
+/sitemap.*
+/wp-config.php
+*.sql
+/wp-content/plugins/stock-data-centre/lib/data.json
+
+# Hidden files
+*.DS_Store
+*Thumbs.db
+*.sass-cache*
+*~imageoptim*
+.composer
