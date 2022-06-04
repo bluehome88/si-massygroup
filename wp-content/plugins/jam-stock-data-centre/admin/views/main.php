@@ -59,7 +59,9 @@ function update_local_file_storage($fetched_data){
   $file = get_home_path()."/wp-content/plugins/jam-stock-data-centre/lib/data.json";
   $timestamp = $fetched_data[0]['date']*1000;
   $value = str_replace('$', '', $fetched_data[0]['opening']);
-  $content = ",[$timestamp, $value]";
+  $change = str_replace('$', '', $fetched_data[0]['change']);
+  $change_per = str_replace('$', '', $fetched_data[0]['change_per']);
+  $content = ",[$timestamp, $value, $change, $change_per]";
   file_put_contents($file, $content.PHP_EOL , FILE_APPEND | LOCK_EX);
 }
 
@@ -71,9 +73,6 @@ if(isset($_POST['submit']) && $_POST['condition'] == 'Y'){
   $last_updated_date = date("Y-m-d",($last_updated[0]/1000));
 
   $fetched_date = date("Y-m-d",strtotime($fetched_data[0]['date']));
-
-echo $fetched_date;
-echo $last_updated_date;
 
   if($fetched_date > $last_updated_date){
     $fetched_data[0]['date'] = strtotime($fetched_data[0]['date']);

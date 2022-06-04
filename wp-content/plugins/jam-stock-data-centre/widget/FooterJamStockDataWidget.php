@@ -24,19 +24,21 @@ class FooterJamStockDataWidget extends \WP_Widget {
 		$stock_data_results = $wpdb->get_results("SELECT jsdt.timestamp,jsdt.value 
 		  FROM $stock_data_table AS jsdt
 		  ORDER BY jsdt.id DESC
-		  LIMIT 1");
+		  LIMIT 2");
 
 		/* Group Income Statement Information data by year */
-		foreach ($stock_data_results as $record){
-			$stock_data['opening'] = $record->value;
-			$stock_data['timestamp'] = $record->timestamp;
-		}
+		$previous = $stock_data_results[1]->value;
+		$current = $stock_data_results[0]->value;
+		$latest_date = $stock_data_results[0]->timestamp;
 
       	$html .= '
       	<p class="mt-4 mb-2 font-weight-light">
-		  Latest Share price TTSE: $'.$stock_data['opening'].'
+		  Latest Share Price JSE: $'.$current.'
 		</p>
-		<p class="font-weight-light">Last update '.date('M d Y', $stock_data['timestamp']/1000).'</p>';
+      	<p class="font-weight-light">
+		  Previous Closed Price JSE: $'.$previous.'
+		</p>
+		<p class="font-weight-light">Last updated '.date('M d Y', $latest_date/1000).'</p>';
 
         echo $html;
 	}

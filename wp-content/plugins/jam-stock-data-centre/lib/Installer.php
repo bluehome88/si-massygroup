@@ -42,6 +42,8 @@ class Installer{
             foreach ($daily_record as $key => $el) {
                 if($key == 0) { $data_table_key = 'timestamp'; }
                 if($key == 1) { $data_table_key = 'value'; }
+                if($key == 2) { $data_table_key = 'change_value'; }
+                if($key == 3) { $data_table_key = 'change_percentage'; }
                 $temparr[$data_table_key] = $el;
             }
             $wpdb->insert( $stock_data, $temparr);
