@@ -30,6 +30,7 @@ node_modules/
 /wp-config.php
 *.sql
 /wp-content/plugins/stock-data-centre/lib/data.json
+/wp-content/plugins/jam-stock-data-centre/lib/data.json
 
 # Hidden files
 *.DS_Store
