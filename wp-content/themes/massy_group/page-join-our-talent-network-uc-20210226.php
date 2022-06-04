@@ -17,13 +17,13 @@
   </div>
 
   <div class="career_form mt-93">
-    <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post" id="talent-form" enctype="multipart/form-data">
+    <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post" id="talent-form" enctype="multipart/form-data" onsubmit="return SubmitForm()">
       <div class="careerFormBox">
         <h4>Talent Network Registration</h4>
         <input type="hidden" name="action" value="career_registration">
         <div class="d-flex align-items-center flex-wrap nameInput">
           <div>
-            <input type="text" name="talent_network_applicants[first_name]" placeholder="First Name" required  />
+            <input type="text" name="talent_network_applicants[first_name]" placeholder="First Name" required />
           </div>
           <div>
             <input type="text" name="talent_network_applicants[last_name]" placeholder="Last Name" required />
@@ -35,7 +35,7 @@
           </div>
           <div class="d-flex align-items-center area__code">
             <input type="number" name="talent_network_applicants[area_code]" placeholder="Area Code" class="areaCode" required />
-            <input type="number" name="talent_network_applicants[phone]" placeholder="Phone Number" required/>
+            <input type="number" name="talent_network_applicants[phone]" placeholder="Phone Number" required />
           </div>
         </div>
         <div class="nameInput">
@@ -46,12 +46,12 @@
             <input type="text" name="talent_network_applicants[city]" placeholder="City" required />
           </div>
           <div>
-            <input type="text" name="talent_network_applicants[state]" placeholder="State"/>
+            <input type="text" name="talent_network_applicants[state]" placeholder="State" />
           </div>
         </div>
         <div class="d-flex align-items-center flex-wrap nameInput">
           <div>
-            <input type="text" name="talent_network_applicants[zip_code]" placeholder="Zip Code"/>
+            <input type="text" name="talent_network_applicants[zip_code]" placeholder="Zip Code" />
           </div>
           <div>
             <!-- <input type="text" name="talent_network_applicants[country]" placeholder="Country" /> -->
@@ -85,9 +85,7 @@
         </label>
         <p class="error-msg"></p>
         <input type="file" name="resume" id="resume" class="d-none" />
-        <div class="g-recaptcha" data-sitekey="6LeUfQcaAAAAAAES6R7TrqI7f8BKt35hHVgDZwq_"></div>
-        <div id="recaptcha_error" style="display:none;color: red;background: white;margin: 10px 0;padding: 10px;border: 1px solid;border-radius: 10px;">Please complete the Re-captcha authentication to submit the form.</div>
-        <?php //echo do_shortcode( '[bws_google_captcha]' ); ?>
+        <?php echo do_shortcode( '[bws_google_captcha]' ); ?>
       </div>
 
       <div class="container d-flex justify-content-center" style="margin-bottom: 56px;">
@@ -106,56 +104,24 @@
 </main>
 
 <?php get_footer(); ?>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <script type="text/javascript">
-
-
-jQuery(document).ready(function(e){
-  jQuery("form#talent-form").submit(function(e){
-    e.preventDefault();
-    jQuery("#recaptcha_error").hide();
-    let flag = true;
+    function SubmitForm() {
+      let flag = true;
       let file = $("#resume");
-      let sitekey = grecaptcha.getResponse();
-
       if(file.val() == null || file.val() == ""){
         file.addClass("error");
         file.siblings("p").html("Please provide your resume.");
         file.siblings("p").show();
         flag = false;
-      }
-      else if(sitekey.length > 0 || sitekey == ""){   
-        jQuery.ajax({
-          url: '<?php echo esc_url( admin_url('admin-post.php') ); ?>',
-          type: "POST",
-          data:  new FormData(this),
-          contentType: false,
-          cache: false,
-          processData:false,
-          beforeSend : function(){console.log("beforeSend");},
-          success: function(data){
-            if(data == "reCAPTCHA_ERROR"){
-              jQuery("#recaptcha_error").show();
-              // alert("Please complete the Re-captcha authentication to submit the form.");
-            }
-            else{
-              window.location.href = data;
-            }
-            //console.log(data)
-          },
-          error: function(e) 
-          {
-            console.log(e);
-          }          
-        });           
-      }
-      else{
+      }else{
         file.removeClass("error");
         file.siblings("p").hide();
       }
+
       if(!flag){
         return false;
       }
-  });
-});
+    }
 </script>
+

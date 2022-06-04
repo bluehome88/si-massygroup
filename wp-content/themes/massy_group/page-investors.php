@@ -20,16 +20,18 @@
       <!-- invetsor description section -->
       <?php get_sidebar('investor-description'); ?>
 
-      <!-- Stock Data Section -->
-      <?php get_sidebar('stock-data-section'); ?>
+      
       
       <div class="d-flex main_section_wrapper">
         <div class="Sidebar">
           <?=custom_investor_menu();?>
         </div>
+
         <!-- Financial Data section -->
         <?php get_sidebar('financial-data'); ?>
+        
       </div>
+
     </div>
   </div>
 

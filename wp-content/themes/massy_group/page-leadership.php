@@ -3,7 +3,7 @@
 
 <main>
   <!-- Banner section -->
-  <div class="BusinessBanner leaderBanner">
+  <div class="BusinessBanner leaderBanner" style="background: url('<?=wp_get_attachment_url( get_post_thumbnail_id() )?>');">
     <div class="container h-100">
       <div
         class="d-flex justify-content-end align-items-center h-100 overflow-hidden"
@@ -33,7 +33,7 @@
     </div>
     <div class="row leaderShipSection">
       <?php
-        $args = array( 'post_type' => 'leadership', 'posts_per_page' => '2', 'leadership_category' => 'board-member', 'meta_key'=> 'meta-checkbox_leadership', 'meta_value' => 'yes', 'orderby' => 'date', 'order' => 'ASC');
+        $args = array( 'post_type' => 'leadership', 'posts_per_page' => '3', 'leadership_category' => 'board-member', 'meta_key'=> 'meta-checkbox_leadership', 'meta_value' => 'yes', 'orderby' => 'date', 'order' => 'ASC');
         $the_query = new WP_Query( $args ); 
         if ( $the_query->have_posts() ) :
           while ( $the_query->have_posts() ) : $the_query->the_post();

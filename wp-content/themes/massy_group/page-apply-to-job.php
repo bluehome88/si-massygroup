@@ -59,7 +59,7 @@ $job_requirements = $wpdb->get_results("SELECT * FROM $job_requirement_table WHE
         <div class="tab">
           <div class="d-flex align-items-start flex-wrap nameInput">
             <div>
-              <input type="text" name="job_applicants[first_name]" id="ja-first-name" placeholder="First Name" />
+              <input type="text" name="job_applicants[first_name]" id="ja-first-name" placeholder="First Name"  />
               <p id="ja-first-name-error" class="error-msg"></p>
             </div>
             <div>
@@ -82,6 +82,7 @@ $job_requirements = $wpdb->get_results("SELECT * FROM $job_requirement_table WHE
                   id="ja-area-code"
                   placeholder="Area Code"
                   class="areaCode"
+            
                 />
                 <p id="ja-area-code-error" class="error-msg areaCode"></p>
               </div>
@@ -590,6 +591,8 @@ $job_requirements = $wpdb->get_results("SELECT * FROM $job_requirement_table WHE
               <p class="error-msg"></p>
             </div>
           </div> -->
+          <div class="g-recaptcha" data-sitekey="6LeUfQcaAAAAAAES6R7TrqI7f8BKt35hHVgDZwq_" data-callback="recaptchaCallback"></div>
+          <div id="recaptcha_error" style="display:none;color: red;background: white;margin: 10px 0;padding: 10px;border: 1px solid;border-radius: 10px;">Please complete the Re-captcha authentication to submit the form.</div>
         </div>
       </form>
     </div>
@@ -619,7 +622,7 @@ $job_requirements = $wpdb->get_results("SELECT * FROM $job_requirement_table WHE
 
 
 <?php get_footer(); ?>
-
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <script type="text/javascript">
   /* ====================== 
       step form script
@@ -655,7 +658,11 @@ $job_requirements = $wpdb->get_results("SELECT * FROM $job_requirement_table WHE
     if (n == x.length - 1) {
       document.querySelector('.continue').innerHTML = 'Submit';
       document.querySelector('.continue').removeAttribute('onclick');
-      document.querySelector('.continue').setAttribute('onclick', 'SubmitForm()');
+      document.querySelector('.continue').setAttribute('onclick', 'SubmitForm(event)');
+      // document.querySelector('.continue').disabled = true;
+      // if(grecaptcha.getResponse().length !== 0){
+      //   document.querySelector('.continue').disabled = false;
+      // }
     } else {
       document.querySelector('.continue').innerHTML = 'Continue';
       document.querySelector('.continue').setAttribute('onclick', 'nextPrev(1)');
@@ -670,6 +677,7 @@ $job_requirements = $wpdb->get_results("SELECT * FROM $job_requirement_table WHE
   }
 
   function nextPrev(n) {
+    document.querySelector('.continue').disabled = false;
     var x = document.getElementsByClassName('tab');
     console.log(n);
     if(n == 1){
@@ -701,5 +709,18 @@ $job_requirements = $wpdb->get_results("SELECT * FROM $job_requirement_table WHE
   function showAwhFinishDate(){
     $("#awh-currently-employed-block").hide();
     $("#awh-finish-date-block").show();
+  }
+
+  function recaptchaCallback() {
+    document.querySelector('.continue').disabled = false;
+  };
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if(urlParams.has('job_id')){
+    let jID = urlParams.get('job_id');
+    if(jID) {}else{window.location.href = window.location.origin+"/careers";}
+  }else{
+    window.location.href = window.location.origin+"/careers";
   }
 </script>

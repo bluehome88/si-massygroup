@@ -21,9 +21,69 @@
     <div class="container">
       <div class="newsInner">
         <div class="row">
-            <!-- news & update -->
-  <?php get_sidebar('news-and-updates-main'); ?>
-  <!-- who we are section -->
+          <?php
+          $counter = 1;
+          $html = '';
+          $class = '';
+          $args = array( 'post_type' => 'newsitems', 'posts_per_page' => '3', 'meta_key'=> 'meta-checkbox', 'meta_value' => 'yes');
+          $the_query = new WP_Query( $args ); 
+          if ( $the_query->have_posts() ) :
+            while ( $the_query->have_posts() ) : $the_query->the_post();
+              $excerpt = wp_strip_all_tags( get_the_excerpt(), true );
+              $excerpt = substr($excerpt, 0, 100);
+              $excerpt = substr($excerpt, 0, strrpos($excerpt, ' '));
+              if ( $counter == 1 ) :
+              ?>
+                <div class="col-lg-6" data-aos="fade-right">
+                  <a href="<?=get_the_permalink()?>">
+                    <img src="<?=wp_get_attachment_url( get_post_thumbnail_id() )?>" alt="News Thumbnail" />
+                    <p class="date">NEWS <span><?=get_the_date()?></span></p>
+                    <h4 class="newTitle mb-4"><?=get_the_title()?></h4>
+                  </a>
+                </div>
+              <?php
+              else:
+                if ( $counter == 2 ) :
+                  ?>
+                  <div class="col-lg-6" data-aos="fade-left">
+                  <?php
+                endif;
+                ?>
+                <div <?=$class?>>
+                  <a href="<?=get_the_permalink()?>">
+                    <div class="d-flex flex-wrap flex-sm-nowrap">
+                      <img
+                        src="<?=wp_get_attachment_url( get_post_thumbnail_id() )?>"
+                        alt="News Thumbnail"
+                        class="newsImage"
+                      />
+                      <div>
+                        <p class="date">NEWS <span><?=get_the_date()?></span></p>
+                        <h4 class="newTitle"><?=get_the_title()?></h4>
+                        <p class="newsDeccription">
+                          “...<?=$excerpt?>...”
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <?php
+              endif;
+              $counter = $counter + 1;
+              if ( $counter > 2 ) :
+                $class = 'class="mt-3"';
+              endif;
+            endwhile;
+            if ( $counter > 2 ) :
+              ?>
+              </div>
+              <?php
+            endif;
+            wp_reset_postdata();
+          else:
+          _e( 'Sorry, no posts matched your criteria.' );
+          endif;
+          ?>
         </div>
       </div>
     </div>

@@ -20,8 +20,6 @@
       <!-- invetsor description section -->
       <?php get_sidebar('investor-description'); ?>
 
-      <!-- Stock Data Section -->
-      <?php get_sidebar('stock-data-section'); ?>
       
       <div class="d-flex main_section_wrapper">
         <div class="Sidebar">

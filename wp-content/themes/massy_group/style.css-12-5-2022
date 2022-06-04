@@ -2162,7 +2162,6 @@ text {
   margin-right: -35px;
 }
 
-
 /* financial calendar styles */
 .mainWrapper {
   background: #f4f4f4;
@@ -3029,12 +3028,6 @@ input[type='number'] {
   text-align: center;
 }
 
-/* fixed Board of Directors center */
-@media (min-width: 990px) {
-  .leaderShipSection > div:nth-child(5) {
-      margin-left: 25%;
-  }
-}
 
 /* Gutenberg Style Classes */
 

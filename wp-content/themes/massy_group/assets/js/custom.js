@@ -1,126 +1,130 @@
 // nav toggler
-const menuBtn = document.querySelector('.menuBTN');
-const navContainer = document.querySelector('.navigation');
+const menuBtn = document.querySelector(".menuBTN");
+const navContainer = document.querySelector(".navigation");
 let menuOpen = false;
-menuBtn.addEventListener('click', () => {
+menuBtn.addEventListener("click", () => {
   if (!menuOpen) {
-    menuBtn.classList.add('open');
+    menuBtn.classList.add("open");
     menuOpen = true;
-    navContainer.classList.add('show');
+    navContainer.classList.add("show");
   } else {
-    menuBtn.classList.remove('open');
+    menuBtn.classList.remove("open");
     menuOpen = false;
-    navContainer.classList.remove('show');
+    navContainer.classList.remove("show");
   }
 });
 
-var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
-  $BODY = $('body'),
-  $SIDEBAR_MENU = $('.Sidebar'),
+var CURRENT_URL = window.location.href.split("#")[0].split("?")[0],
+  $BODY = $("body"),
+  $SIDEBAR_MENU = $(".Sidebar"),
   // $NAV_MENU = $('.nav_menu'),
   // Sidebar
 
   openUpMenu = function () {
-    $SIDEBAR_MENU.find('li ul').slideUp();
+    $SIDEBAR_MENU.find("li ul").slideUp();
   };
 
-$SIDEBAR_MENU.find('a').on('click', function (ev) {
-  console.log('clicked');
+$SIDEBAR_MENU.find("a").on("click", function (ev) {
+  console.log("clicked");
   // check if exist dropdown then slidup that thing and remove active class
   var $li = $(this).parent();
-  if ($('ul:first', $li).is(':visible')) {
-    $li.removeClass('current-page');
-    $('ul:first', $li).slideUp();
+  if ($("ul:first", $li).is(":visible")) {
+    $li.removeClass("current-page");
+    $("ul:first", $li).slideUp();
   } else {
-    $li.children('a').addClass('current-page');
-    $('ul:first', $li).slideDown();
+    $li.children("a").addClass("current-page");
+    $("ul:first", $li).slideDown();
   }
 });
 
 // check active menu
 $SIDEBAR_MENU
   .find('a[href="' + CURRENT_URL + '"]')
-  .parent('li')
-  .addClass('current-page');
+  .parent("li")
+  .addClass("current-page");
 
 $SIDEBAR_MENU
-  .find('a')
+  .find("a")
   .filter(function () {
     return this.href == CURRENT_URL;
   })
-  .parent('li')
+  .parent("li")
   // .addClass('link_active')
-  .parents('ul')
+  .parents("ul")
   .slideDown()
   .siblings()
-  .addClass('current-page');
+  .addClass("current-page");
 
 // search toggler
 
-const searchToggle = document.querySelector('.searchToggle');
-const inputBox = document.querySelector('.header_search');
-searchToggle.addEventListener('click', () => {
-  if (inputBox.classList.contains('search_show') && inputBox.value === '') {
-    inputBox.classList.remove('search_show');
+const searchToggle = document.querySelector(".searchToggle");
+const inputBox = document.querySelector(".header_search");
+searchToggle.addEventListener("click", () => {
+  if (inputBox.classList.contains("search_show") && inputBox.value === "") {
+    inputBox.classList.remove("search_show");
   } else {
-    inputBox.classList.add('search_show');
+    inputBox.classList.add("search_show");
     setTimeout(() => {
-      document.querySelector('.header_search').focus();
+      document.querySelector(".header_search").focus();
     }, 500);
   }
 });
 
-inputBox.addEventListener('blur', () => {
-  if (inputBox.value == '') inputBox.classList.remove('search_show');
+inputBox.addEventListener("blur", () => {
+  if (inputBox.value == "") inputBox.classList.remove("search_show");
 });
 
-var DeviceWidth = window.matchMedia('(max-width: 599px)');
-const SearchContainer = document.querySelector('.searchbar');
+var DeviceWidth = window.matchMedia("(max-width: 599px)");
+const SearchContainer = document.querySelector(".searchbar");
 if (DeviceWidth.matches) {
-  searchToggle.addEventListener('click', () => {
-    menuBtn.style.display = 'none';
-    inputBox.classList.add('search_show');
+  searchToggle.addEventListener("click", () => {
+    menuBtn.style.display = "none";
+    inputBox.classList.add("search_show");
     setTimeout(() => {
-      document.querySelector('.header_search').focus();
+      document.querySelector(".header_search").focus();
     }, 18);
-    SearchContainer.classList.add('search-expanded');
+    SearchContainer.classList.add("search-expanded");
   });
-  inputBox.addEventListener('focus', () => {
-    menuBtn.style.display = 'none';
-    SearchContainer.classList.add('search-expanded');
+  inputBox.addEventListener("focus", () => {
+    menuBtn.style.display = "none";
+    SearchContainer.classList.add("search-expanded");
   });
-  inputBox.addEventListener('blur', () => {
-    if (inputBox.value === '') {
-      menuBtn.style.display = 'flex';
-      inputBox.classList.remove('search_show');
-      SearchContainer.classList.remove('search-expanded');
-      SearchContainer.removeAttribute('style');
+  inputBox.addEventListener("blur", () => {
+    if (inputBox.value === "") {
+      menuBtn.style.display = "flex";
+      inputBox.classList.remove("search_show");
+      SearchContainer.classList.remove("search-expanded");
+      SearchContainer.removeAttribute("style");
     } else {
-      menuBtn.style.display = 'flex';
-      SearchContainer.classList.remove('search-expanded');
-      SearchContainer.style.minWidth = '30%';
+      menuBtn.style.display = "flex";
+      SearchContainer.classList.remove("search-expanded");
+      SearchContainer.style.minWidth = "30%";
     }
   });
 }
 
-$('.owl-carousel').owlCarousel({
+$(".owl-carousel").owlCarousel({
   items: 1,
   nav: true,
   dots: true,
   navText: [
-    "<img src='"+window.location.origin+"/wp-content/themes/massy_group/assets/images/prevBtn.png'>",
-    "<img src='"+window.location.origin+"/wp-content/themes/massy_group/assets/images/nextBtn.png'>",
+    "<img src='" +
+      window.location.origin +
+      "/wp-content/themes/massy_group/assets/images/prevBtn.png'>",
+    "<img src='" +
+      window.location.origin +
+      "/wp-content/themes/massy_group/assets/images/nextBtn.png'>",
   ],
 });
 
-$('.owl-carousel').on('changed.owl.carousel', function (event) {
+$(".owl-carousel").on("changed.owl.carousel", function (event) {
   var item = event.item.index - 2; // Position of the current item
-  $('.bottomBox').removeClass('animateIn');
-  $('.owl-item')
-    .not('.cloned')
+  $(".bottomBox").removeClass("animateIn");
+  $(".owl-item")
+    .not(".cloned")
     .eq(item)
-    .find('.bottomBox')
-    .addClass('animateIn');
+    .find(".bottomBox")
+    .addClass("animateIn");
 });
 
 // chart js
@@ -692,33 +696,33 @@ $('.owl-carousel').on('changed.owl.carousel', function (event) {
 // }
 
 // collapse
-$('.btn-block').click(function () {
+$(".btn-block").click(function () {
   $(this)
     .parent()
     .parent()
     .parent()
     .siblings()
-    .find('.btn-block')
-    .removeClass('clicked');
-  $(this).toggleClass('clicked');
-// });
+    .find(".btn-block")
+    .removeClass("clicked");
+  $(this).toggleClass("clicked");
+  // });
 
-// // sidebar investors page
+  // // sidebar investors page
 
-// $('.Sidebar li a').click(function (e) {
-//   e.preventDefault();
-//   $(this).addClass('link_active');
-//   $(this).parent().siblings().children('a').removeClass('link_active');
+  // $('.Sidebar li a').click(function (e) {
+  //   e.preventDefault();
+  //   $(this).addClass('link_active');
+  //   $(this).parent().siblings().children('a').removeClass('link_active');
 
-//   // show hide div
-//   const href = $(this).attr('data-target');
-//   if (href[0]) {
-//     $('.main_Content').children().removeClass('shown');
-//     $('.main_Content ' + href).addClass('shown');
-//   } else {
-//     console.log('not found');
-//     return false;
-//   }
+  //   // show hide div
+  //   const href = $(this).attr('data-target');
+  //   if (href[0]) {
+  //     $('.main_Content').children().removeClass('shown');
+  //     $('.main_Content ' + href).addClass('shown');
+  //   } else {
+  //     console.log('not found');
+  //     return false;
+  //   }
 });
 
 // animation
@@ -731,28 +735,62 @@ AOS.init({
 
 var win = window;
 if (win.innerWidth < 1180) {
-  $('.nav_items img').click(function () {
-    $(this).parent().find('ul').slideToggle();
-    $(this).parent().parent().children().find('ul').slideUp();
-    $(this).parent().find('ul').clearQueue();
+  $(".nav_items img").click(function () {
+    $(this).parent().find("ul").slideToggle();
+    $(this).parent().parent().children().find("ul").slideUp();
+    $(this).parent().find("ul").clearQueue();
   });
 }
 
-$('#resume').change(function() {
-  var file = $('#resume')[0].files[0].name;
-  $(this).prev('label').text(file);
+$("#resume").change(function () {
+  var file = $("#resume")[0].files[0].name;
+  $(this).prev("label").text(file);
 });
 
 // submit jobs application form here
-function SubmitForm() {
-  console.log('herere');
-  if (!validateForm(currentTab+1)) return false;
-  document.getElementById('jobForm').submit();
+function SubmitForm(e) {
+  console.log("herere");
+  //---------------------------------
+  e.preventDefault();
+  jQuery("#recaptcha_error").hide();
+  let sitekey = grecaptcha.getResponse();
+  let jobForm = document.getElementById("jobForm");
+  if (sitekey.length > 0 || sitekey == "") {
+    jQuery.ajax({
+      url: jQuery("form#jobForm").attr("action"),
+      type: "POST",
+      data: new FormData(jobForm),
+      contentType: false,
+      cache: false,
+      processData: false,
+      beforeSend: function () {
+        console.log("beforeSend");
+      },
+      success: function (data) {
+        if (data == "reCAPTCHA_ERROR") {
+          jQuery("#recaptcha_error").show();
+          // alert(
+          //   "Please complete the Re-captcha authentication to submit the form."
+          // );
+        } else {
+          window.location.href = data;
+        }
+        console.log(data);
+      },
+      error: function (e) {
+        console.log(e);
+      },
+    });
+  }
+
+  // -------------------------
+  if (!validateForm(currentTab + 1)) return false;
+  // document.getElementById("jobForm").submit();
 }
 
-function validateForm(step){
+function validateForm(step) {
   let flag = true;
-  if(step == 1){
+  if (step == 1) {
     let ja_first_name = $("#ja-first-name");
     let ja_last_name = $("#ja-last-name");
     let ja_email = $("#ja-email");
@@ -766,93 +804,100 @@ function validateForm(step){
     // let ja_citizen = $("#ja-citizen");
 
     let email_re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    
-    if(ja_first_name.val() == null || ja_first_name.val() == ""){
+
+    if (ja_first_name.val() == null || ja_first_name.val() == "") {
       ja_first_name.addClass("error");
       ja_first_name.siblings("p").html("First Name is required");
       ja_first_name.siblings("p").show();
       flag = false;
-    }else{
+    } else {
       ja_first_name.removeClass("error");
       ja_first_name.siblings("p").hide();
     }
 
-    if(ja_last_name.val() == null || ja_last_name.val() == ""){
+    if (ja_last_name.val() == null || ja_last_name.val() == "") {
       ja_last_name.addClass("error");
       ja_last_name.siblings("p").html("Last Name is required");
       ja_last_name.siblings("p").show();
       flag = false;
-    }else{
+    } else {
       ja_last_name.removeClass("error");
       ja_last_name.siblings("p").hide();
     }
 
-    if(ja_email.val() == null || ja_email.val() == ""){
+    if (ja_email.val() == null || ja_email.val() == "") {
       ja_email.addClass("error");
       ja_email.siblings("p").html("Email is required");
       ja_email.siblings("p").show();
       flag = false;
-    }else if(ja_email.val() && !email_re.test(ja_email.val())){
+    } else if (ja_email.val() && !email_re.test(ja_email.val())) {
       ja_email.addClass("error");
       ja_email.siblings("p").html("Email format should be abc@sample.com");
       ja_email.siblings("p").show();
       flag = false;
-    }else{
+    } else {
       ja_email.removeClass("error");
       ja_email.siblings("p").hide();
     }
 
-    if(ja_area_code.val() == null || ja_area_code.val() == ""){
+    if (ja_area_code.val() == null || ja_area_code.val() == "") {
       let area_code_error_msg = "Area Code is required";
       ja_area_code.addClass("error");
       ja_area_code.siblings("p").html(area_code_error_msg);
       ja_area_code.siblings("p").show();
       flag = false;
-    }else if(ja_area_code.val() && (ja_area_code.val().length < 2 || ja_area_code.val().length > 3)){
-        console.log(ja_area_code.val().length);
-        area_code_error_msg = "Please enter at least 2 and no more than 3 digits.";
-        ja_area_code.addClass("error");
-        ja_area_code.siblings("p").html(area_code_error_msg);
-        ja_area_code.siblings("p").show();
-        flag = false;
-    }else{
+    } else if (
+      ja_area_code.val() &&
+      (ja_area_code.val().length < 2 || ja_area_code.val().length > 3)
+    ) {
+      console.log(ja_area_code.val().length);
+      area_code_error_msg =
+        "Please enter at least 2 and no more than 3 digits.";
+      ja_area_code.addClass("error");
+      ja_area_code.siblings("p").html(area_code_error_msg);
+      ja_area_code.siblings("p").show();
+      flag = false;
+    } else {
       ja_area_code.removeClass("error");
       ja_area_code.siblings("p").hide();
     }
 
-    if(ja_phone.val() == null || ja_phone.val() == ""){
+    if (ja_phone.val() == null || ja_phone.val() == "") {
       let phone_error_msg = "Phone is required";
       ja_phone.addClass("error");
       ja_phone.siblings("p").html(phone_error_msg);
       ja_phone.siblings("p").show();
       flag = false;
-    }else if(ja_phone.val() && (ja_phone.val().length < 7 || ja_phone.val().length > 9)){
-        phone_error_msg = "Please enter at least 7 and no more than 9 digits.";
-        ja_phone.addClass("error");
-        ja_phone.siblings("p").html(phone_error_msg);
-        ja_phone.siblings("p").show();
-        flag = false;
-    }else{
+    } else if (
+      ja_phone.val() &&
+      (ja_phone.val().length < 7 || ja_phone.val().length > 9)
+    ) {
+      phone_error_msg = "Please enter at least 7 and no more than 9 digits.";
+      ja_phone.addClass("error");
+      ja_phone.siblings("p").html(phone_error_msg);
+      ja_phone.siblings("p").show();
+      flag = false;
+    } else {
       ja_phone.removeClass("error");
       ja_phone.siblings("p").hide();
     }
 
-    if(ja_address_line_1.val() == null || ja_address_line_1.val() == ""){
+    if (ja_address_line_1.val() == null || ja_address_line_1.val() == "") {
       ja_address_line_1.addClass("error");
       ja_address_line_1.siblings("p").html("Address is required");
       ja_address_line_1.siblings("p").show();
       flag = false;
-    }else{
+    } else {
       ja_address_line_1.removeClass("error");
       ja_address_line_1.siblings("p").hide();
     }
 
-    if(ja_city.val() == null || ja_city.val() == ""){
+    if (ja_city.val() == null || ja_city.val() == "") {
       ja_city.addClass("error");
       ja_city.siblings("p").html("City is required");
       ja_city.siblings("p").show();
       flag = false;
-    }else{
+    } else {
       ja_city.removeClass("error");
       ja_city.siblings("p").hide();
     }
@@ -908,7 +953,7 @@ function validateForm(step){
   //   let aws_incentive_earned_last_year = $("#aws-incentive-earned-last-year");
   //   let aws_value_of_other_benefits = $("#aws-value-of-other-benefits");
   //   let aws_tcc = $("#aws-tcc");
-    
+
   //   if(aws_available_start_date.val() == null || aws_available_start_date.val() == ""){
   //     aws_available_start_date.addClass("error");
   //     $("#aws-available-start-date-error").html("Available Start Date is required");
@@ -1018,7 +1063,7 @@ function validateForm(step){
   //   let awh_finish_date = $("#awh-finish-date");
   //   let awh_duties = $("#awh-duties");
   //   let awh_reason_for_leaving = $("#awh-reason-for-leaving");
-    
+
   //   if(awh_employer_name.val() == null || awh_employer_name.val() == ""){
   //     awh_employer_name.addClass("error");
   //     awh_employer_name.siblings("p").html("Employer Name is required");
@@ -1108,7 +1153,7 @@ function validateForm(step){
   //   let awh_finish_date_additional = $("#awh-finish-date-additional");
   //   let awh_duties_additional = $("#awh-duties-additional");
   //   let awh_reason_for_leaving_additional = $("#awh-reason-for-leaving-additional");
-    
+
   //   if(awh_employer_name_additional.val() == null || awh_employer_name_additional.val() == ""){
   //     awh_employer_name_additional.addClass("error");
   //     awh_employer_name_additional.siblings("p").html("Employer Name is required");
@@ -1189,18 +1234,21 @@ function validateForm(step){
   //     awh_reason_for_leaving_additional.siblings("p").hide();
   //   }
   // }
-  if(step == 5){
+  if (step == 5) {
     let aai_criminal_offender = $("#aai-criminal-offender");
     // let aai_offence_reasons = $("#aai-offence-reasons");
     let aai_employed_under_other_name = $("#aai-employed-under-other-name");
     // let aai_reason_for_leaving = $("#aai-reason-for-leaving");
-    
-    if(aai_criminal_offender.val() == null || aai_criminal_offender.val() == ""){
+
+    if (
+      aai_criminal_offender.val() == null ||
+      aai_criminal_offender.val() == ""
+    ) {
       aai_criminal_offender.addClass("error");
       aai_criminal_offender.siblings("p").html("This field is required");
       aai_criminal_offender.siblings("p").show();
       flag = false;
-    }else{
+    } else {
       aai_criminal_offender.removeClass("error");
       aai_criminal_offender.siblings("p").hide();
     }
@@ -1215,12 +1263,17 @@ function validateForm(step){
     //   aai_offence_reasons.siblings("p").hide();
     // }
 
-    if(aai_employed_under_other_name.val() == null || aai_employed_under_other_name.val() == ""){
+    if (
+      aai_employed_under_other_name.val() == null ||
+      aai_employed_under_other_name.val() == ""
+    ) {
       aai_employed_under_other_name.addClass("error");
-      aai_employed_under_other_name.siblings("p").html("This field is required");
+      aai_employed_under_other_name
+        .siblings("p")
+        .html("This field is required");
       aai_employed_under_other_name.siblings("p").show();
       flag = false;
-    }else{
+    } else {
       aai_employed_under_other_name.removeClass("error");
       aai_employed_under_other_name.siblings("p").hide();
     }
@@ -1242,7 +1295,7 @@ function validateForm(step){
   //   let aeh_college_name = $("#aeh-college-name");
   //   let aeh_college_degree = $("#aeh-college-degree");
   //   let aeh_college_graduated = $("#aeh-college-graduated");
-    
+
   //   if(aeh_school_name.val() == null || aeh_school_name.val() == ""){
   //     aeh_school_name.addClass("error");
   //     aeh_school_name.siblings("p").html("School Name is required");
@@ -1310,7 +1363,7 @@ function validateForm(step){
   //   let aeh_college_name_additional = $("#aeh-college-name-additional");
   //   let aeh_college_degree_additional = $("#aeh-college-degree-additional");
   //   let aeh_college_graduated_additional = $("#aeh-college-graduated-additional");
-    
+
   //   if(aeh_school_name_additional.val() == null || aeh_school_name_additional.val() == ""){
   //     aeh_school_name_additional.addClass("error");
   //     aeh_school_name_additional.siblings("p").html("School Name is required");
@@ -1374,20 +1427,28 @@ function validateForm(step){
   return flag;
 }
 
-$('#job-title').keypress(function (e) {
+$("#job-title").keypress(function (e) {
   if (e.which == 13) {
     showjobs();
     return false;
   }
 });
 
-function showjobs(){
+function showjobs() {
   let title = $("#job-title").val();
   let country = $("#job-country").val();
   let sector = $("#job-sector").val();
   let _function = $("#job-function").val();
 
   var base_url = window.location.origin;
-  window.location.href = base_url+"/careers?jobs=search&title="+title+"&country="+country+"&sector="+sector+"&function="+_function;
+  window.location.href =
+    base_url +
+    "/careers?jobs=search&title=" +
+    title +
+    "&country=" +
+    country +
+    "&sector=" +
+    sector +
+    "&function=" +
+    _function;
 }
-

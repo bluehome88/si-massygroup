@@ -25,7 +25,7 @@
                       </p>
                     </div>
                     <div class="d-flex justify-content-end">
-                      <a href="<?php echo get_permalink( get_page_by_path('about-us') ); ?>">Learn More</a>
+                      <a href="<?php echo get_permalink( get_page_by_path('about-us') ); ?>">Learn more</a>
                     </div>
                   </div>
                 </div>

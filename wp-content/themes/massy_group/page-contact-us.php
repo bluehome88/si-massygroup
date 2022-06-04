@@ -50,7 +50,7 @@
         </p>
       </div>
       <div>
-        <a href="">Register Now</a>
+        <a href="<?=get_permalink(get_page_by_path('careers/join-our-talent-network'))?>">Register Now</a>
       </div>
     </div>
   </div>
