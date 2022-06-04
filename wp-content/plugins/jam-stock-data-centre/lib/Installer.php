@@ -8,7 +8,7 @@ class Installer{
 
         global $wpdb;
 
-        $stock_data = $wpdb->prefix . 'jam_stock_data';
+        $stock_data = $wpdb->prefix . "jam_stock_data";
 
         $stock_data_sql = "CREATE TABLE " . $stock_data . " (
                 id int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -50,7 +50,7 @@ class Installer{
 
     public static function deactivation(){
         global $wpdb;
-        $stock_data = $wpdb->prefix . 'jam_stock_data';
+        $stock_data = $wpdb->prefix . "jam_stock_data";
 
         $wpdb->query("DROP TABLE IF EXISTS $stock_data");
     }

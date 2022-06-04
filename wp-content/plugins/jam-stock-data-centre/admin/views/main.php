@@ -3,19 +3,17 @@
 include_once(get_home_path()."/wp-content/plugins/jam-stock-data-centre/lib/simplehtmldom/simple_html_dom.php");
 
 function fetch_latest_stock_entry(){
-  $html = file_get_html('https://www.stockex.co.tt/manage-stock/massy/');
-
+  $html = str_get_html(file_get_contents( 'https://www.jamstockex.com/trading/instruments/?instrument=massy-jmd' ));
   // get data block
-  foreach($html->find('table#index_information') as $row) {
-    $item['opening'] = trim($row->find('td', 1)->plaintext);
-    $item['change'] = trim($row->find('td', 2)->plaintext);
-    $item['change_per'] = trim($row->find('td', 3)->plaintext);
-  }
 
-  // get latest date
-  foreach($html->find('div#elementor-tab-content-2321') as $content) {
-    $date_para = trim($content->find('u', 0)->plaintext);
-    $item['date'] = trim(str_replace('Trade Information for', '', $date_para));
+  $container = $html->find('[data-id=54a1ae3]', 0);
+
+  foreach( $container->find('.tw-items-end') as $row) {
+      $item['opening'] = (float)substr(trim($row->find('.tw-flex', 0)->plaintext), 1);
+      $item['change'] = (float)substr(trim($row->find('.tw-ml-3', 0)->plaintext), 1);
+      $item['change_per'] = (float)substr(trim($row->find('.tw-ml-3', 1)->plaintext), 1);
+
+      $item['date'] = date("d-M-y");
   }
 
   $ret[] = $item;
@@ -74,6 +72,9 @@ if(isset($_POST['submit']) && $_POST['condition'] == 'Y'){
 
   $fetched_date = date("Y-m-d",strtotime($fetched_data[0]['date']));
 
+echo $fetched_date;
+echo $last_updated_date;
+
   if($fetched_date > $last_updated_date){
     $fetched_data[0]['date'] = strtotime($fetched_data[0]['date']);
     if(add_new_entry($fetched_data)){
@@ -95,11 +96,6 @@ $last_updated = $current[0]/1000;
 $change_val = $current[2];
 $change_per = $current[3];
 $previous_close = end($prev_stock_data)[1];
-
-// print '<pre>';
-// print_r($current);
-// print '</pre>';
-
 ?>
 
 <h3>Jam Stock Data Information</h3>
