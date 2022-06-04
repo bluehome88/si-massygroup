@@ -1,17 +1,17 @@
 <?php
 
-namespace StockDataCentre\Widgets;
+namespace JamStockDataCentre\Widgets;
 
-class HomePageStockDataWidget extends \WP_Widget {
+class HomePageJamStockDataWidget extends \WP_Widget {
 
 	function __construct() {
 		parent::__construct(
 			// widget ID
-			'homepage_stock_data_widget',
+			'homepage_jam_stock_data_widget',
 			// widget name
-			__('HomePage Stock Data Widget', 'homepage_stock_data_widget_domain'),
+			__('HomePage Jam Stock Data Widget', 'homepage_jam_stock_data_widget_domain'),
 			// widget description
-			array( 'description' => __( 'Stock Data Widget For Homepage', 'homepage_stock_data_widget_domain' ), )
+			array( 'description' => __( 'Jam Stock Data Widget For Homepage', 'homepage_jam_stock_data_widget_domain' ), )
 		);
 	}
 
@@ -19,11 +19,11 @@ class HomePageStockDataWidget extends \WP_Widget {
 		global $wpdb;
 		$stock_data = array();
 		$html = '';
-		$stock_data_table = $wpdb->prefix . "stock_data";
+		$stock_data_table = $wpdb->prefix . "jam_stock_data";
 
-		$stock_data_results = $wpdb->get_results("SELECT sdt.value 
-		  FROM $stock_data_table AS sdt
-		  ORDER BY sdt.id DESC
+		$stock_data_results = $wpdb->get_results("SELECT jsdt.value 
+		  FROM $stock_data_table AS jsdt
+		  ORDER BY jsdt.id DESC
 		  LIMIT 1");
 
 		/* Group Income Statement Information data by year */
@@ -48,7 +48,7 @@ class HomePageStockDataWidget extends \WP_Widget {
 		if ( isset( $instance[ 'title' ] ) )
 			$title = $instance[ 'title' ];
 		else
-			$title = __( 'Default Title', 'homepage_stock_data_widget_domain' );
+			$title = __( 'Default Title', 'homepage_jam_stock_data_widget_domain' );
 		?>
 		<p>
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Company Trading Name:' ); ?></label>

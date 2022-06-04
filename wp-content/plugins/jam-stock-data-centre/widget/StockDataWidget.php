@@ -1,17 +1,17 @@
 <?php
 
-namespace StockDataCentre\Widgets;
+namespace JamStockDataCentre\Widgets;
 
-class StockDataWidget extends \WP_Widget {
+class JamStockDataWidget extends \WP_Widget {
 
 	function __construct() {
 		parent::__construct(
 			// widget ID
-			'stock_data_widget',
+			'jam_stock_data_widget',
 			// widget name
-			__('Stock Data Widget', 'stock_data_widget_domain'),
+			__('Jam Stock Data Widget', 'jam_stock_data_widget_domain'),
 			// widget description
-			array( 'description' => __( 'Stock Data Chart For Investor Screens', 'stock_data_widget_domain' ), )
+			array( 'description' => __( 'Jam Stock Data Chart For Investor Screens', 'jam_stock_data_widget_domain' ), )
 		);
 	}
 
@@ -19,11 +19,11 @@ class StockDataWidget extends \WP_Widget {
 		global $wpdb;
 		$stock_data = array();
 		$html = '';
-		$stock_data_table = $wpdb->prefix . "stock_data";
+		$stock_data_table = $wpdb->prefix . "jam_stock_data";
 
-		$stock_data_results = $wpdb->get_results("SELECT sdt.timestamp,sdt.value,sdt.change_value,sdt.change_percentage 
-		  FROM $stock_data_table AS sdt
-		  ORDER BY sdt.timestamp ASC");
+		$stock_data_results = $wpdb->get_results("SELECT jsdt.timestamp,jsdt.value,jsdt.change_value,jsdt.change_percentage 
+		  FROM $stock_data_table AS jsdt
+		  ORDER BY jsdt.timestamp ASC");
 
 		/* Group Income Statement Information data by year */
 		foreach ($stock_data_results as $record){

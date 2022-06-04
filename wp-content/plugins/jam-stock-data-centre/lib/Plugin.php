@@ -1,10 +1,10 @@
 <?php
 
-namespace StockDataCentre\Lib;
-use StockDataCentre\Widgets\StockDataWidget as SDWidget;
-use StockDataCentre\Widgets\FooterStockDataWidget as FSDWidget;
-use StockDataCentre\Widgets\HomePageStockDataWidget as HPSDWidget;
-use StockDataCentre\Lib\Menu as adminMenu;
+namespace JamStockDataCentre\Lib;
+use JamStockDataCentre\Widgets\JamStockDataWidget as JSDWidget;
+use JamStockDataCentre\Widgets\FooterJamStockDataWidget as FJSDWidget;
+use JamStockDataCentre\Widgets\HomePageJamStockDataWidget as HPJSDWidget;
+use JamStockDataCentre\Lib\Menu as adminMenu;
 
 class Plugin{
 
@@ -16,12 +16,7 @@ class Plugin{
 
     public function add_menu(){
 
-        $main_page = add_menu_page('Stock Data Centre', 'Stock Data Centre', 'manage_options', 'stock-data-centre', array( new adminMenu(), '_renderListView' ), 'dashicons-chart-line', 23);
-
-        // $edit_page = add_submenu_page('financial-data-entry', 'Edit Financial Entries', 'Edit','manage_options', 'edit-financial-entries', array( new adminMenu(), '_renderEditView' ));
-
-        // add_action( 'load-' . $main_page, array($this,'load_admin_js') );
-        // add_action( 'load-' . $edit_page, array($this,'load_admin_js') );
+        $main_page = add_menu_page('Stock Data Centre - Jam', 'Stock Data Centre - Jam', 'manage_options', 'jam-stock-data-centre', array( new adminMenu(), '_renderListView' ), 'dashicons-chart-line', 23);
     }
 
     public function load_admin_js(){
@@ -47,9 +42,9 @@ class Plugin{
     }
 
     public function plugin_widgets(){
-        register_widget( new SDWidget() );
-        register_widget( new FSDWidget() );
-        register_widget( new HPSDWidget() );
+        register_widget( new JSDWidget() );
+        register_widget( new FJSDWidget() );
+        register_widget( new HPJSDWidget() );
     }
  
 }

@@ -1,6 +1,6 @@
 <?php
 
-include_once(get_home_path()."/wp-content/plugins/stock-data-centre/lib/simplehtmldom/simple_html_dom.php");
+include_once(get_home_path()."/wp-content/plugins/jam-stock-data-centre/lib/simplehtmldom/simple_html_dom.php");
 
 function fetch_latest_stock_entry(){
   $html = file_get_html('https://www.stockex.co.tt/manage-stock/massy/');
@@ -31,11 +31,11 @@ function get_prev_stock_data(){
   global $wpdb;
   $stock_data = array();
   $html = '';
-  $stock_data_table = $wpdb->prefix . "stock_data";
+  $stock_data_table = $wpdb->prefix . "jam_stock_data";
 
-  $stock_data_results = $wpdb->get_results("SELECT sdt.timestamp,sdt.value,sdt.change_value,sdt.change_percentage 
-    FROM $stock_data_table AS sdt
-    ORDER BY sdt.id DESC
+  $stock_data_results = $wpdb->get_results("SELECT jsdt.timestamp,jsdt.value,jsdt.change_value,jsdt.change_percentage 
+    FROM $stock_data_table AS jsdt
+    ORDER BY jsdt.id DESC
     LIMIT 2");
 
   /* Group Income Statement Information data by year */
@@ -47,7 +47,7 @@ function get_prev_stock_data(){
 
 function add_new_entry($fetched_data){
   global $wpdb;
-  $stock_data_table = $wpdb->prefix . "stock_data";
+  $stock_data_table = $wpdb->prefix . "jam_stock_data";
   $timestamp = $fetched_data[0]['date']*1000;
   $value = str_replace('$', '', $fetched_data[0]['opening']);
   $change = str_replace('$', '', $fetched_data[0]['change']);
@@ -58,7 +58,7 @@ function add_new_entry($fetched_data){
 }
 
 function update_local_file_storage($fetched_data){
-  $file = get_home_path()."/wp-content/plugins/stock-data-centre/lib/data.json";
+  $file = get_home_path()."/wp-content/plugins/jam-stock-data-centre/lib/data.json";
   $timestamp = $fetched_data[0]['date']*1000;
   $value = str_replace('$', '', $fetched_data[0]['opening']);
   $content = ",[$timestamp, $value]";
@@ -102,7 +102,7 @@ $previous_close = end($prev_stock_data)[1];
 
 ?>
 
-<h3>Stock Data Information</h3>
+<h3>Jam Stock Data Information</h3>
 <br>
 <form method="post" action="">
   <input type="hidden" name="condition" value="Y">

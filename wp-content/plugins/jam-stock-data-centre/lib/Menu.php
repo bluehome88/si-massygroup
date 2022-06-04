@@ -1,13 +1,9 @@
 <?php
-namespace StockDataCentre\Lib;
+namespace JamStockDataCentre\Lib;
 
 class Menu{
 
 	public function _renderListView() {
-        include_once( WP_PLUGIN_DIR.'/stock-data-centre/admin/views/main.php' );
+        include_once( WP_PLUGIN_DIR.'/jam-stock-data-centre/admin/views/main.php' );
     }
-
-    // public function _renderEditView(){
-    //     include_once( WP_PLUGIN_DIR.'/stock-data-centre/admin/views/edit.php' );
-    // }
 }

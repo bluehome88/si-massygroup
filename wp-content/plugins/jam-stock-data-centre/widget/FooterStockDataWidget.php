@@ -1,17 +1,17 @@
 <?php
 
-namespace StockDataCentre\Widgets;
+namespace JamStockDataCentre\Widgets;
 
-class FooterStockDataWidget extends \WP_Widget {
+class FooterJamStockDataWidget extends \WP_Widget {
 
 	function __construct() {
 		parent::__construct(
 			// widget ID
-			'footer_stock_data_widget',
+			'footer_jam_stock_data_widget',
 			// widget name
-			__('Footer Stock Data Widget', 'footer_stock_data_widget_domain'),
+			__('Footer Jam Stock Data Widget', 'footer_jam_stock_data_widget_domain'),
 			// widget description
-			array( 'description' => __( 'Stock Data Widget For Footer', 'footer_stock_data_widget_domain' ), )
+			array( 'description' => __( 'Jam Stock Data Widget For Footer', 'footer_jam_stock_data_widget_domain' ), )
 		);
 	}
 
@@ -19,11 +19,11 @@ class FooterStockDataWidget extends \WP_Widget {
 		global $wpdb;
 		$stock_data = array();
 		$html = '';
-		$stock_data_table = $wpdb->prefix . "stock_data";
+		$stock_data_table = $wpdb->prefix . "jam_stock_data";
 
-		$stock_data_results = $wpdb->get_results("SELECT sdt.timestamp,sdt.value 
-		  FROM $stock_data_table AS sdt
-		  ORDER BY sdt.id DESC
+		$stock_data_results = $wpdb->get_results("SELECT jsdt.timestamp,jsdt.value 
+		  FROM $stock_data_table AS jsdt
+		  ORDER BY jsdt.id DESC
 		  LIMIT 1");
 
 		/* Group Income Statement Information data by year */
