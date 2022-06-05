@@ -26,8 +26,11 @@ class JamStockDataWidget extends \WP_Widget {
 		  ORDER BY jsdt.timestamp ASC");
 
 		/* Group Income Statement Information data by year */
+		$min_value = 100000;
 		foreach ($stock_data_results as $record){
 			$stock_data[] = "[$record->timestamp,$record->value]";
+			if( $min_value > $record->value )
+				$min_value = $record->value;
 		}
 
 		$current = end($stock_data_results);
@@ -60,33 +63,58 @@ class JamStockDataWidget extends \WP_Widget {
 			  // console.log(width);
 			  document.addEventListener('DOMContentLoaded', function () {
 			    Highcharts.stockChart('myChart', {
-			      rangeSelector: {
-			        selected: 1,
-			      },
-
-			      title: {
-			        text: null,
-			      },
-			      subtitle: {
-			        text: null,
-			      },
-			      navigator: {
-			        enabled: false,
-			      },
-			      scrollbar: {
-			        enabled: false,
-			      },
-			      zoom: {
-			        enabled: false,
-			      },
+					rangeSelector: {
+						enabled: true,
+						inputEnabled: false,
+						selected: 1
+					},
+					navigator: {
+						enabled: false
+					},
+					credits: {
+						enabled: false
+					},
+					tooltip: {
+						enabled: true
+					},
+			        zoom: {
+			        	enabled: false,
+			        },
+     			    scrollbar: {
+			        	enabled: false,
+			      	},
+					yAxis: [{
+						title: {
+							text: 'Price'
+						},
+						lineWidth: 2,
+						min: <?php echo $min_value-1 ; ?>
+					}],
+					xAxis: [{
+						title: {
+							text: 'Date'
+						}
+					}],
+				  exporting: false,
 			      series: [
 			        {
 			          name: 'MASSY',
 			          data: [<?php echo join($stock_data, ',') ?>],
-			          navigator: false,
+			          type: 'area',
+			          color: '#0095DA',
 			          tooltip: {
 			            valueDecimals: 2,
 			          },
+			          marker: {
+			          	enabled: true,
+			          	radius: 3
+			          },
+			          fillColor: {
+						linearGradient: [0, 0, 0, 300],
+						stops: [
+						  [0, '#0095DA'],
+						  [1, 'rgba(255,255,255,0)']
+						]}
 			        },
 			      ],
 			      responsive: {
