@@ -21,22 +21,29 @@ class FooterJamStockDataWidget extends \WP_Widget {
 		$html = '';
 		$stock_data_table = $wpdb->prefix . "jam_stock_data";
 
-		$stock_data_results = $wpdb->get_results("SELECT jsdt.timestamp,jsdt.value 
+		// get jse value
+		$jse_data_results = $wpdb->get_results("SELECT jsdt.timestamp,jsdt.value 
 		  FROM $stock_data_table AS jsdt
 		  ORDER BY jsdt.id DESC
-		  LIMIT 2");
+		  LIMIT 1");
 
-		/* Group Income Statement Information data by year */
-		$previous = $stock_data_results[1]->value;
-		$current = $stock_data_results[0]->value;
-		$latest_date = $stock_data_results[0]->timestamp;
+		$jse_value = $jse_data_results[0]->value;
+		$latest_date = $jse_data_results[0]->timestamp;
+
+		// get ttse value
+		$stock_data_table = $wpdb->prefix . "stock_data";
+		$ttse_data_results = $wpdb->get_results("SELECT sdt.timestamp,sdt.value 
+		  FROM $stock_data_table AS sdt
+		  ORDER BY sdt.id DESC
+		  LIMIT 1");
+		$ttse_value = $ttse_data_results[0]->value;
 
       	$html .= '
       	<p class="mt-4 mb-2 font-weight-light">
-		  Latest Share Price JSE: $'.$current.'
+		  Latest Share price TTSE: $'.$ttse_value.'
 		</p>
       	<p class="font-weight-light">
-		  Previous Closed Price JSE: $'.$previous.'
+		  Latest Share Price JSE: $'.$jse_value.'
 		</p>
 		<p class="font-weight-light">Last updated '.date('M d Y', $latest_date/1000).'</p>';
 

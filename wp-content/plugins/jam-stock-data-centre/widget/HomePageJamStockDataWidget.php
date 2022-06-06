@@ -19,16 +19,28 @@ class HomePageJamStockDataWidget extends \WP_Widget {
 		global $wpdb;
 		$stock_data = array();
 		$html = '';
-		$stock_data_table = $wpdb->prefix . "jam_stock_data";
+		$jse_data_table = $wpdb->prefix . "jam_stock_data";
 
-		$stock_data_results = $wpdb->get_results("SELECT jsdt.value 
-		  FROM $stock_data_table AS jsdt
+		$jse_data_results = $wpdb->get_results("SELECT jsdt.value 
+		  FROM $jse_data_table AS jsdt
 		  ORDER BY jsdt.id DESC
 		  LIMIT 1");
 
 		/* Group Income Statement Information data by year */
-		foreach ($stock_data_results as $record){
-			$stock_data['opening'] = $record->value;
+		foreach ($jse_data_results as $record){
+			$stock_data['jse_opening'] = $record->value;
+		}
+
+		$ttse_data_table = $wpdb->prefix . "stock_data";
+
+		$ttse_data_results = $wpdb->get_results("SELECT sdt.value 
+		  FROM $ttse_data_table AS sdt
+		  ORDER BY sdt.id DESC
+		  LIMIT 1");
+
+		/* Group Income Statement Information data by year */
+		foreach ($ttse_data_results as $record){
+			$stock_data['ttse_opening'] = $record->value;
 		}
 
       	$html .= '
@@ -36,8 +48,9 @@ class HomePageJamStockDataWidget extends \WP_Widget {
 			<h2>Latest Stock Price</h2>
 	        <h4>Company trading name:</h4>
 	        <p>'.$instance[ 'title' ].'</p>
-	        <h4>Stock Price:</h4>
-	        <p>$'.$stock_data['opening'].'</p>
+	        
+	        <p>TTSE Stock Price: $'.$stock_data['ttse_opening'].'</p>
+	        <p>JSE Stock Price: $'.$stock_data['jse_opening'].'</p>
 		</div>
 		';
 
