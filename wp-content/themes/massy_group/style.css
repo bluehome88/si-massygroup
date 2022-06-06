@@ -1645,10 +1645,10 @@ ul ul li a.current-page{
   display: flex;
   flex: 2;
   flex-wrap: wrap;
-  padding: 40px 20px;
+  padding: 10px 10px;
   padding-bottom: 18px;
   margin-bottom: 50px;
-  background: #f4f4f4;
+  /* background: #f4f4f4; */
 }
 
 .chartTopInner {
@@ -3038,3 +3038,24 @@ input[type='number'] {
 
 /* Gutenberg Style Classes */
 
+.chartWrapper{
+  background: #f4f4f4;
+  padding: 30px 20px;
+}
+li.widget_text{
+  list-style: none;
+}
+@media (max-width: 767px) {
+  .chartWrapper {
+    display: block !important;
+  }
+  .chartDetails{
+    margin-right: 0;
+  }
+  .chartWrapper, .chartDetails h3, .chartDetails .redText, .chartDetails .timeStamp{
+    text-align: center !important;
+  }
+  .main_content_inner div:nth-child(2){
+    margin-right: 0;
+  }
+}

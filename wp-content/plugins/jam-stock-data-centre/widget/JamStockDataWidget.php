@@ -36,21 +36,23 @@ class JamStockDataWidget extends \WP_Widget {
 		$current = end($stock_data_results);
 		$previous = $stock_data_results[count($stock_data_results) -2];
 		$html .= '
-			<div class="chartDetails">
-            	<h3>$'.$current->value.'</h3>
-            	<p class="redText">$'.$current->change_value.' - '.$current->change_percentage.'%</p>
-	            <div class="timeStamp text-right">
-	              <p>Last updated: '.date('M d Y h:i A', $current->timestamp/1000).'</p>
-	              <!-- <p>Business/Consumer Services: <span>-1.30</span></p> -->
-	            </div>
-	            <div class="prevRecored">
-	              <p>Previous Close</p>
-	              <p>$'.$previous->value.'</p>
-	            </div>
-          	</div>
-          	<div class="chart-container">
-            	<div id="myChart"></div>
-          	</div>';
+			<div class="d-flex chartWrapper">
+				<div class="chartDetails">
+	            	<h3>$'.$current->value.'</h3>
+	            	<p class="redText">$'.$current->change_value.' - '.$current->change_percentage.'%</p>
+		            <div class="timeStamp text-right">
+		              <p>Last updated: '.date('M d Y h:i A', $current->timestamp/1000).'</p>
+		              <!-- <p>Business/Consumer Services: <span>-1.30</span></p> -->
+		            </div>
+		            <div class="prevRecored">
+		              <p>Previous Close</p>
+		              <p>$'.$previous->value.'</p>
+		            </div>
+	          	</div>
+	          	<div class="chart-container">
+	            	<div id="jseChart"></div>
+	          	</div>
+	        </div>';
 
         echo $html;
 
@@ -58,11 +60,11 @@ class JamStockDataWidget extends \WP_Widget {
 
         <script type="text/javascript">
 
-        	if (document.getElementById('myChart')) {
+        	if (document.getElementById('jseChart')) {
 			  var width = document.querySelector('.chart-container').offsetWidth;
 			  // console.log(width);
 			  document.addEventListener('DOMContentLoaded', function () {
-			    Highcharts.stockChart('myChart', {
+			    Highcharts.stockChart('jseChart', {
 					rangeSelector: {
 						enabled: true,
 						inputEnabled: false,
