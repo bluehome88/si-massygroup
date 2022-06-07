@@ -90,7 +90,7 @@ class JamStockDataWidget extends \WP_Widget {
 							text: 'Price'
 						},
 						lineWidth: 2,
-						min: <?php echo $min_value-1 ; ?>
+						min: <?php echo $min_value-0.1 ; ?>
 					}],
 					xAxis: [{
 						title: {

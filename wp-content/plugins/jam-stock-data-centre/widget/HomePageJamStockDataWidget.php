@@ -48,9 +48,10 @@ class HomePageJamStockDataWidget extends \WP_Widget {
 			<h2>Latest Stock Price</h2>
 	        <h4>Company trading name:</h4>
 	        <p>'.$instance[ 'title' ].'</p>
-	        
-	        <p>TTSE Stock Price: $'.$stock_data['ttse_opening'].'</p>
-	        <p>JSE Stock Price: $'.$stock_data['jse_opening'].'</p>
+	        <br/>
+	        <h4>Stock Prices:</h4>
+	        <p>TTSE: $'.$stock_data['ttse_opening'].'</p>
+	        <p>JSE: $'.$stock_data['jse_opening'].'</p>
 		</div>
 		';
 

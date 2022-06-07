@@ -40,12 +40,12 @@ class FooterJamStockDataWidget extends \WP_Widget {
 
       	$html .= '
       	<p class="mt-4 mb-2 font-weight-light">
-		  Latest Share price TTSE: $'.$ttse_value.'
+		  Latest Share Price TTSE: $'.$ttse_value.'
 		</p>
       	<p class="font-weight-light">
 		  Latest Share Price JSE: $'.$jse_value.'
 		</p>
-		<p class="font-weight-light">Last updated '.date('M d Y', $latest_date/1000).'</p>';
+		<p class="font-weight-light">Last Updated '.date('M d Y', $latest_date/1000).'</p>';
 
         echo $html;
 	}
