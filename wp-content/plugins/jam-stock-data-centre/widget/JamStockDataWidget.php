@@ -77,7 +77,23 @@ class JamStockDataWidget extends \WP_Widget {
 						enabled: false
 					},
 					tooltip: {
-						enabled: true
+						enabled: true,
+						formatter: function() {
+							var date = this.x;
+							var price = this.y;
+
+							var a = new Date( date );
+							var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+							var year = a.getFullYear();
+							var month = months[a.getMonth()];
+							var date = a.getDate();
+							var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+							var dayOfWeek = days[a.getDay()]
+
+							date = dayOfWeek + ", " + month +" " + date + ", " + year;
+
+							return '<p>' + date + '</p><br/><p style="font-size:16px;">Price: <b>' + price + '</b></p>' ;
+						}
 					},
 			        zoom: {
 			        	enabled: false,
