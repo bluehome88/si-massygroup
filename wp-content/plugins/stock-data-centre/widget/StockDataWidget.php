@@ -63,7 +63,7 @@ class StockDataWidget extends \WP_Widget {
 			  document.addEventListener('DOMContentLoaded', function () {
 			    Highcharts.stockChart('ttseChart', {
 			      rangeSelector: {
-			        selected: 1,
+			        selected: 0,
 			      },
 
 			      title: {
@@ -100,7 +100,7 @@ class StockDataWidget extends \WP_Widget {
 			            chartOptions: {
 			              chart: {
 			                width: width,
-			                height: 300,
+			                height: 400,
 			              },
 			              subtitle: {
 			                text: null,

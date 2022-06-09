@@ -68,7 +68,7 @@ class JamStockDataWidget extends \WP_Widget {
 					rangeSelector: {
 						enabled: true,
 						inputEnabled: false,
-						selected: 1
+						selected: 0
 					},
 					navigator: {
 						enabled: false
@@ -128,7 +128,7 @@ class JamStockDataWidget extends \WP_Widget {
 			          	radius: 3
 			          },
 			          fillColor: {
-						linearGradient: [0, 0, 0, 300],
+						linearGradient: [0, 0, 0, 400],
 						stops: [
 						  [0, '#0095DA'],
 						  [1, 'rgba(255,255,255,0)']
@@ -144,7 +144,7 @@ class JamStockDataWidget extends \WP_Widget {
 			            chartOptions: {
 			              chart: {
 			                width: width,
-			                height: 300,
+			                height: 400,
 			              },
 			              subtitle: {
 			                text: null,

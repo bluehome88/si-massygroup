@@ -1664,7 +1664,7 @@ ul ul li a.current-page{
 .chart-container {
   flex: 1;
   max-width: 650px;
-  max-height: 300px;
+  max-height: 400px;
   flex-shrink: 0;
 }
 
