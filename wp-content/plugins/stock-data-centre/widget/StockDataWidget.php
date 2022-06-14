@@ -26,8 +26,11 @@ class StockDataWidget extends \WP_Widget {
 		  ORDER BY sdt.timestamp ASC");
 
 		/* Group Income Statement Information data by year */
+		$min_value = 100000;
 		foreach ($stock_data_results as $record){
 			$stock_data[] = "[$record->timestamp,$record->value]";
+			if( $min_value > $record->value )
+				$min_value = $record->value;
 		}
 
 		$current = end($stock_data_results);
@@ -63,32 +66,73 @@ class StockDataWidget extends \WP_Widget {
 			  document.addEventListener('DOMContentLoaded', function () {
 			    Highcharts.stockChart('ttseChart', {
 			      rangeSelector: {
-			        selected: 0,
-			      },
+						enabled: true,
+						inputEnabled: false,
+						selected: 0
+					},
+					navigator: {
+						enabled: false
+					},
+					credits: {
+						enabled: false
+					},
+					tooltip: {
+						enabled: true,
+						formatter: function() {
+							var date = this.x;
+							var price = this.y;
 
-			      title: {
-			        text: null,
-			      },
-			      subtitle: {
-			        text: null,
-			      },
-			      navigator: {
-			        enabled: false,
-			      },
-			      scrollbar: {
-			        enabled: false,
-			      },
-			      zoom: {
-			        enabled: false,
-			      },
+							var a = new Date( date );
+							var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+							var year = a.getUTCFullYear();
+							var month = months[a.getUTCMonth()];
+							var date = a.getUTCDate();
+							var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+							var dayOfWeek = days[a.getUTCDay()]
+
+							date = dayOfWeek + ", " + month +" " + date + ", " + year;
+
+							return '<p>' + date + '</p><br/><p style="font-size:16px;">Price: <b>$' + price + '</b></p>' ;
+						}
+					},
+			        zoom: {
+			        	enabled: false,
+			        },
+     			    scrollbar: {
+			        	enabled: false,
+			      	},
+					yAxis: [{
+						title: {
+							text: 'Price'
+						},
+						lineWidth: 2,
+						min: <?php echo $min_value-0.1 ; ?>
+					}],
+					xAxis: [{
+						title: {
+							text: 'Date'
+						}
+					}],
+				  exporting: false,
 			      series: [
 			        {
 			          name: 'MASSY',
 			          data: [<?php echo join($stock_data, ',') ?>],
-			          navigator: false,
+			          type: 'area',
+			          color: '#0095DA',
 			          tooltip: {
 			            valueDecimals: 2,
 			          },
+			          marker: {
+			          	enabled: true,
+			          	radius: 3
+			          },
+			          fillColor: {
+						linearGradient: [0, 0, 0, 400],
+						stops: [
+						  [0, '#0095DA'],
+						  [1, 'rgba(255,255,255,0)']
+						]}
 			        },
 			      ],
 			      responsive: {

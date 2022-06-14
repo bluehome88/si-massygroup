@@ -61,7 +61,10 @@ function update_local_file_storage($fetched_data){
   $file = get_home_path()."/wp-content/plugins/stock-data-centre/lib/data.json";
   $timestamp = $fetched_data[0]['date']*1000;
   $value = str_replace('$', '', $fetched_data[0]['opening']);
-  $content = ",[$timestamp, $value]";
+  $change = str_replace('$', '', $fetched_data[0]['change']);
+  $change_per = str_replace('%', '', $fetched_data[0]['change_per']);
+
+  $content = ",[$timestamp, $value, $change, $change_per]";
   file_put_contents($file, $content.PHP_EOL , FILE_APPEND | LOCK_EX);
 }
 
