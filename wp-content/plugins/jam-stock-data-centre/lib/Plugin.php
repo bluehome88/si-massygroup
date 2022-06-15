@@ -57,11 +57,14 @@ class Plugin{
         $last_updated = array_values($prev_stock_data)[0];
         $last_updated_date = date("Y-m-d",($last_updated[0]/1000));
 
+        $fetched_date = date("Y-m-d",strtotime($fetched_data[0]['date']));
+
+        $log_txt = date("Y-m-d h:i:s").", ".$fetched_date.", $".$fetched_data[0]['opening'].", ".$fetched_data[0]['change'].", ".$fetched_data[0]['change_per']."\n\r";
+        error_log( $log_txt, 3, __DIR__."/cron.log");
+
         if( $fetched_data[0]['opening'] == $last_updated[1] ){
             return false;
         }
-
-        $fetched_date = date("Y-m-d",strtotime($fetched_data[0]['date']));
 
         if($fetched_date > $last_updated_date){
           $fetched_data[0]['date'] = strtotime($fetched_data[0]['date']);
