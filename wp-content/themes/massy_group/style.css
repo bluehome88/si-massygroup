@@ -3045,6 +3045,12 @@ input[type='number'] {
 li.widget_text{
   list-style: none;
 }
+.greenText {
+  font-weight: 600;
+  color: #2ca50d;
+  font-size: 14px;
+  text-align: right;
+}
 @media (max-width: 767px) {
   .chartWrapper {
     display: block !important;
