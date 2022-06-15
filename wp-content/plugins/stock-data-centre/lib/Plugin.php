@@ -130,7 +130,7 @@ class Plugin{
     }
 
     public function update_local_file_storage($fetched_data){
-      $file = get_home_path()."/wp-content/plugins/stock-data-centre/lib/data.json";
+      $file = __DIR__."/data.json";
       $timestamp = $fetched_data[0]['date']*1000;
       $value = str_replace('$', '', $fetched_data[0]['opening']);
       $change = str_replace('$', '', $fetched_data[0]['change']);
