@@ -37,7 +37,7 @@ if( !defined( 'PSAC_PLUGIN_BASENAME' ) ) {
 	define( 'PSAC_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); // Plugin base name
 }
 if( !defined('PSAC_POST_TYPE') ) {
-	define('PSAC_POST_TYPE', 'post'); // Post type name
+	define('PSAC_POST_TYPE', 'newsitems'); // Post type name
 }
 if( !defined('PSAC_CAT') ) {
 	define('PSAC_CAT', 'category'); // Plugin category name

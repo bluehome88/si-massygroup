@@ -103,7 +103,7 @@ if (DeviceWidth.matches) {
   });
 }
 
-$(".owl-carousel").owlCarousel({
+$(".homepage-carousel").owlCarousel({
   items: 1,
   nav: true,
   dots: true,
@@ -117,7 +117,7 @@ $(".owl-carousel").owlCarousel({
   ],
 });
 
-$(".owl-carousel").on("changed.owl.carousel", function (event) {
+$(".homepage-carousel").on("changed.owl.carousel", function (event) {
   var item = event.item.index - 2; // Position of the current item
   $(".bottomBox").removeClass("animateIn");
   $(".owl-item")

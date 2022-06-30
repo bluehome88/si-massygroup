@@ -2,7 +2,7 @@
 <?php get_header(); ?>
 
 <main>
-  <div class="owl-carousel carousel">
+  <!--div class="owl-carousel carousel homepage-carousel">
     <?php
 /*
       $itr = 1;
@@ -35,15 +35,17 @@
             
           <?php
           $itr = $itr + 1;
-          $animation_class = '';
+          $animation_class = '';   
         endwhile;
         wp_reset_postdata();  
       else:
         _e( 'Sorry, no slider images found' );
       endif;
 */
-      echo do_shortcode( '[rev_slider alias="home-slider"][/rev_slider]' );
     ?>
+  </div-->
+    <div class="home-slider-wrapper"> 
+    <?php echo do_shortcode( '[rev_slider alias="home-slider"][/rev_slider]' ); ?>
   </div>
 
   <!-- news & update -->
@@ -60,6 +62,16 @@
 
   <!-- career section -->
   <?php get_sidebar('career-opportunities'); ?>
+
+  <div class="career overflow-hidden">
+    <div class="text-center container">
+      <h2 class="heading" data-aos="fade-up">Latest News</h2>
+      <div class="performanceInner">
+        <?php echo do_shortcode( '[psac_post_carousel design="design-2" show_author="false" show_tags="false" show_comments="false" show_content="false" slide_show="3" dots="true" arrows="false" speed="3000"]' );?>
+      </div>
+    </div>
+  </div>
+
 
   <!-- How we performance section -->
   <?php get_sidebar('performance-section-main'); ?>

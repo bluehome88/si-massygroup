@@ -2,7 +2,7 @@
 <?php get_header(); ?>
 
 <main>
-  <div class="owl-carousel carousel">
+  <div class="owl-carousel carousel homepage-carousel">
     <?php
       $itr = 1;
       $animation_class = '';
