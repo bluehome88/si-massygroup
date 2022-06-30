@@ -4,6 +4,7 @@
 <main>
   <div class="owl-carousel carousel">
     <?php
+/*
       $itr = 1;
       $animation_class = '';
       $args = array('post_type' => 'massysliders', 'massy_slider_category' => 'front-page', 'orderby' => 'date', 'order' => 'DESC');
@@ -34,12 +35,14 @@
             
           <?php
           $itr = $itr + 1;
-          $animation_class = '';   
+          $animation_class = '';
         endwhile;
         wp_reset_postdata();  
       else:
         _e( 'Sorry, no slider images found' );
       endif;
+*/
+      echo do_shortcode( '[rev_slider alias="home-slider"][/rev_slider]' );
     ?>
   </div>
 
