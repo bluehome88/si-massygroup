@@ -525,7 +525,11 @@ header {
   height: 650px;
   position: relative;
 }
-
+.home-slider-wrapper {
+  max-height: 700px;
+  position: relative;
+  overflow: hidden;
+}
 .slideItem {
   background-size: cover;
   background-position: center;
@@ -3045,12 +3049,6 @@ input[type='number'] {
 li.widget_text{
   list-style: none;
 }
-.greenText {
-  font-weight: 600;
-  color: #2ca50d;
-  font-size: 14px;
-  text-align: right;
-}
 @media (max-width: 767px) {
   .chartWrapper {
     display: block !important;
@@ -3064,4 +3062,43 @@ li.widget_text{
   .main_content_inner div:nth-child(2){
     margin-right: 0;
   }
+}
+
+/* news slider */
+.psac-post-carousel.psac-design-2 .psac-post-margin-content{
+  min-height: 160px;
+  padding: 0;
+}
+.psac-post-carousel.psac-design-2 .psac-post-title{
+  font-size: 22px;
+  padding: 15px;
+}
+.psac-post-carousel.psac-design-2 .psac-post-title a{
+  color: #003660;
+}
+.psac-post-carousel.psac-design-2 .psac-time{
+  font-size: 12px;
+  display: block;
+  margin: 0;
+  text-align: left;
+  background: #F47920;
+  padding: 10px 12px;
+}
+.psac-post-carousel.psac-design-2 .psac-time a{
+  float: right;
+  font-size: 20px;
+  line-height: 20px;
+  color: #003660;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 2px 5px;
+  border: 1px solid #003660;
+  border-radius: 50%;
+}
+.psac-post-carousel.psac-design-2 .psac-time a:hover{
+  background: rgba(0, 54, 96, 0.5);
+  color: #FFF;
+}
+rs-module rs-mask-wrap .rs-layer, rs-module rs-mask-wrap *:last-child, .wpb_text_column rs-module rs-mask-wrap .rs-layer, .wpb_text_column rs-module rs-mask-wrap *:last-child{
+  font-family: 'Gotham' !important;
 }

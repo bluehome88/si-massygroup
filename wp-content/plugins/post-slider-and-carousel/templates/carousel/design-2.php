@@ -25,6 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 			<?php } ?>
 
+					<?php if($show_date) { ?>
+						<span class="psac-post-meta-innr psac-time"> <?php echo get_the_date(); ?> <a href="<?php the_permalink(); ?>">></a></span>
+					<?php } ?>
+
 			<h2 class="psac-post-title">
 				<a href="<?php echo esc_url( $post_link ); ?>"><?php the_title(); ?></a>
 			</h2>
@@ -35,9 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<span class="psac-post-meta-innr psac-user-img"><?php the_author(); ?></span>
 					<?php } ?>
 					<?php echo ($show_author && $show_date) ? '<span class="psac-sep">/</span>' : '' ?>
-					<?php if($show_date) { ?>
-						<span class="psac-post-meta-innr psac-time"> <?php echo get_the_date(); ?> </span>
-					<?php } ?>
+
 					<?php echo ($show_author && $show_date && $show_comments && !empty($comments)) ? '<span class="psac-sep">/</span>' : '' ?>
 					<?php if(!empty($comments) && $show_comments) { ?>
 						<span class="psac-post-meta-innr psac-post-comments">
