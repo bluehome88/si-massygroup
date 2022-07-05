@@ -3098,7 +3098,19 @@ li.widget_text{
 .psac-post-carousel.psac-design-2 .psac-time a:hover{
   background: rgba(0, 54, 96, 0.5);
   color: #FFF;
+  border: 1px solid #FFF;
 }
 rs-module rs-mask-wrap .rs-layer, rs-module rs-mask-wrap *:last-child, .wpb_text_column rs-module rs-mask-wrap .rs-layer, .wpb_text_column rs-module rs-mask-wrap *:last-child{
   font-family: 'Gotham' !important;
+}
+.psac-slider-and-carousel .owl-nav .owl-next, .psac-slider-and-carousel .owl-nav .owl-prev{
+  background: #03a9f5;
+  color: #fff;
+  border-color: #03a9f5;
+}
+.psac-slider-and-carousel .owl-nav .owl-next:hover, .psac-slider-and-carousel .owl-nav .owl-prev:hover, .psac-slider-and-carousel .owl-nav .owl-next:focus, .psac-slider-and-carousel .owl-nav .owl-prev:focus
+{
+  background: rgba(255,255,255,0.4);
+  color: #000;
+  border: 2px solid #000;
 }

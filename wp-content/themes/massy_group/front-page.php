@@ -55,13 +55,13 @@
     <div class="text-center container">
       <h2 class="heading" data-aos="fade-up">Latest News</h2>
       <div class="performanceInner">
-        <?php echo do_shortcode( '[psac_post_carousel design="design-2" show_author="false" show_tags="false" show_comments="false" show_content="false" slide_show="3" dots="false" arrows="true" autoplay_interval="5000" speed="2000" limit="20" autoplay="false"]' );?>
+        <?php echo do_shortcode( '[psac_post_carousel design="design-2" show_author="false" show_tags="false" show_comments="false" show_content="false" slide_show="3" dots="false" arrows="true" autoplay_interval="5000" speed="2000" limit="10"]' );?>
       </div>
     </div>
   </div>
 
   <!-- news & update -->
-  <?php get_sidebar('news-and-updates'); ?>
+  <?php // get_sidebar('news-and-updates'); ?>
 
   <!-- who we are section -->
   <?php get_sidebar('who-we-are'); ?>
